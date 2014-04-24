@@ -21,7 +21,7 @@ public class WekaModel {
     private Classifier classifier;
     private String path;
 
-    public enum wekaClass{
+    public enum Activity{
         Walking, Jogging, Upstairs, Downstairs, Sitting, Standing
     }
 
@@ -43,25 +43,6 @@ public class WekaModel {
         catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    private Instances createTestInstances(Accelerometer outPut){
-
-        ArffSaver saver = new ArffSaver();
-        String pathFile =  path + "test.arff";
-        Instances testDataSet = null;
-        try {
-            saver.setInstances(convertToInstances(outPut));
-            saver.setFile(new File(pathFile));
-            saver.writeBatch();
-
-            testDataSet = new Instances(new BufferedReader(new FileReader(pathFile)));
-        }
-        catch(IOException ex){
-            ex.printStackTrace();
-        }
-
-        return testDataSet;
     }
 
     private Instances convertToInstances(Accelerometer testData){
@@ -103,27 +84,42 @@ public class WekaModel {
 
         newInstance.setValue(pos++, testData.resultant);
 
-        wekaClass clase = wekaClass.Standing;
-        newInstance.setValue(pos, clase.toString());
-
         newDataSet.add(newInstance);
 
         return newDataSet;
     }
 
+    public void changeClass(Activity activity, Instances testDataSet){
+        Instance instance = testDataSet.firstInstance();
+        instance.setValue(testDataSet.attribute(testDataSet.numAttributes()-1),activity.toString());
+    }
+
     public void startTestingSet(Accelerometer outPut){
-        Instances testDataSet = createTestInstances(outPut);
+        Instances testDataSet = convertToInstances(outPut);
         testDataSet.setClass(testDataSet.attribute(testDataSet.numAttributes()-1));
+        Activity predictedActivity = null;
 
         try {
-            Evaluation evaluation = new Evaluation(trainingSet);
-            evaluation.evaluateModel(classifier, testDataSet);
+            for(Activity activity: Activity.values()){
+                changeClass(activity, testDataSet);
+                Evaluation evaluation = new Evaluation(trainingSet);
+                evaluation.evaluateModel(classifier, testDataSet);
+                double correct = evaluation.correct();
 
-            System.out.println(evaluation.toSummaryString("\nResults\n======\n", false));
+                if(correct == 1){
+                    predictedActivity = activity;
+                    break;
+                }
+            }
         }
         catch(Exception ex){
             System.out.println(ex.toString());
         }
+
+        if(predictedActivity != null)
+            System.out.println("The Predicted Activity is: " + predictedActivity.toString());
+        else
+            System.out.println("Try again ....");
     }
 
     public static void main (String[] arg ){
