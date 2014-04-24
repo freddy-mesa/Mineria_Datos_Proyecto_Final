@@ -1,0 +1,49 @@
+@relation activity_recognition_labeled-weka.filters.unsupervised.attribute.Remove-R1-2
+
+@attribute X0 numeric
+@attribute X1 numeric
+@attribute X2 numeric
+@attribute X3 numeric
+@attribute X4 numeric
+@attribute X5 numeric
+@attribute X6 numeric
+@attribute X7 numeric
+@attribute X8 numeric
+@attribute X9 numeric
+@attribute Y0 numeric
+@attribute Y1 numeric
+@attribute Y2 numeric
+@attribute Y3 numeric
+@attribute Y4 numeric
+@attribute Y5 numeric
+@attribute Y6 numeric
+@attribute Y7 numeric
+@attribute Y8 numeric
+@attribute Y9 numeric
+@attribute Z0 numeric
+@attribute Z1 numeric
+@attribute Z2 numeric
+@attribute Z3 numeric
+@attribute Z4 numeric
+@attribute Z5 numeric
+@attribute Z6 numeric
+@attribute Z7 numeric
+@attribute Z8 numeric
+@attribute Z9 numeric
+@attribute XAVG numeric
+@attribute YAVG numeric
+@attribute ZAVG numeric
+@attribute XPEAK numeric
+@attribute YPEAK numeric
+@attribute ZPEAK numeric
+@attribute XABSOLDEV numeric
+@attribute YABSOLDEV numeric
+@attribute ZABSOLDEV numeric
+@attribute XSTANDDEV numeric
+@attribute YSTANDDEV numeric
+@attribute ZSTANDDEV numeric
+@attribute RESULTANT numeric
+@attribute class {Walking,Jogging,Upstairs,Downstairs,Sitting,Standing}
+
+@data
+0.035714,0.035714,0.089286,0.25,0.321429,0,0.107143,0.071429,0.053571,0.035714,0.053571,0.178571,0,0.25,0,0,0.25,0,0.178571,0.089286,0.017857,0.017857,0.160714,0.125,0,0.214286,0.160714,0.214286,0.053571,0,-1.142607,-0.4475,9.505429,0,0,194.875,0.049144,0.044946,0.058281,0.06711,0.052943,0.070013,9.584697,Standing
