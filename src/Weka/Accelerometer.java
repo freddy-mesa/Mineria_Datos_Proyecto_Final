@@ -91,6 +91,32 @@ public class Accelerometer {
                 allAxesTime.get(1).add(timeMillis);
                 allAxesTime.get(2).add(timeMillis);
             }
+
+            while((currentTime = Math.floor((System.currentTimeMillis() - time) / 1000)) <= 10){
+                timeMillis = System.currentTimeMillis() - time;
+                packet = new DatagramPacket(receiveData, receiveData.length);
+                serverSocket.receive(packet);
+
+                if (currentTime - unSegundo >= 1) entrar = true;
+
+                if (entrar)
+                {
+                    unSegundo = currentTime;
+                    entrar = false;
+                    System.out.println("Second: " + currentTime);
+                }
+
+                String[] allData  = new String(packet.getData()).split(",");
+
+                String x = allData[2].trim(), y = allData[3].trim(), z = allData[4].trim();
+                allAxes.get(0).add(Double.parseDouble(x));
+                allAxes.get(1).add(Double.parseDouble(y));
+                allAxes.get(2).add(Double.parseDouble(z));
+
+                allAxesTime.get(0).add(timeMillis);
+                allAxesTime.get(1).add(timeMillis);
+                allAxesTime.get(2).add(timeMillis);
+            }
         }
         catch(IOException ex){
             System.out.println(ex.toString());
@@ -216,8 +242,8 @@ public class Accelerometer {
         for (int i = 0; i < length; i++)
             res += Math.sqrt(
                     Math.pow(list.get(0).get(i), 2) +
-                            Math.pow(list.get(1).get(i), 2) +
-                            Math.pow(list.get(2).get(i), 2)
+                    Math.pow(list.get(1).get(i), 2) +
+                    Math.pow(list.get(2).get(i), 2)
             );
 
         return res / length;
@@ -226,36 +252,40 @@ public class Accelerometer {
     public void printResult(){
         for(int i=0; i < this.binnedAxes.get(0).size(); ++i ){
             System.out.println(
-                    "X" + i + ": " + this.binnedAxes.get(0).get(i) +
-                            " Y" + i + ": " + this.binnedAxes.get(1).get(i) +
-                            " Z" + i + ": " + this.binnedAxes.get(0).get(i)
+                "X" + i + ": " + this.binnedAxes.get(0).get(i) +
+                "\tY" + i + ": " + this.binnedAxes.get(1).get(i) +
+                "\tZ" + i + ": " + this.binnedAxes.get(0).get(i)
             );
         }
 
-        System.out.println( "\r\nAverage Acceleration\r\n"+
-                        "X: " + this.avgAcceleration.get(0) +
-                        "\tY: " + this.avgAcceleration.get(1) +
-                        "\tZ: " + this.avgAcceleration.get(2)
+        System.out.println(
+                "\r\nAverage Acceleration\r\n"+
+                "X: " + this.avgAcceleration.get(0) +
+                "\tY: " + this.avgAcceleration.get(1) +
+                "\tZ: " + this.avgAcceleration.get(2)
         );
 
-        System.out.println( "\r\nTime Between Peaks\r\n"+
-                        "X: " + this.peaks.get(0) +
-                        "\tY: " + this.peaks.get(1) +
-                        "\tZ: " + this.peaks.get(2)
+        System.out.println(
+                "\r\nTime Between Peaks\r\n"+
+                "X: " + this.peaks.get(0) +
+                "\tY: " + this.peaks.get(1) +
+                "\tZ: " + this.peaks.get(2)
         );
 
-        System.out.println( "\r\nAbsolute Average Difference\r\n"+
-                        "X: " + this.avgDifAbs.get(0) +
-                        "\tY: " + this.avgDifAbs.get(1) +
-                        "\tZ: " + this.avgDifAbs.get(2)
+        System.out.println(
+                "\r\nAbsolute Average Difference\r\n"+
+                "X: " + this.avgDifAbs.get(0) +
+                "\tY: " + this.avgDifAbs.get(1) +
+                "\tZ: " + this.avgDifAbs.get(2)
         );
 
-        System.out.println( "\r\nStandard Deviation\r\n"+
-                        "X: " + this.devStandard.get(0) +
-                        "\tY: " + this.devStandard.get(1) +
-                        "\tZ: " + this.devStandard.get(2)
+        System.out.println(
+                "\r\nStandard Deviation\r\n"+
+                "X: " + this.devStandard.get(0) +
+                "\tY: " + this.devStandard.get(1) +
+                "\tZ: " + this.devStandard.get(2)
         );
 
-        System.out.println( "\r\nResultant\r\n" + this.resultant);
+        System.out.println( "\r\nResultant: " + this.resultant);
     }
 }
