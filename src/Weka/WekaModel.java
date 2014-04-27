@@ -3,6 +3,7 @@ package Weka;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.trees.J48;
+import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
@@ -12,6 +13,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Freddy Mesa on 15-Apr-14.
@@ -45,86 +48,100 @@ public class WekaModel {
         }
     }
 
-    private Instances convertToInstances(Accelerometer testData){
+    private void saveTestInstances(Instances testDataSet){
+        ArffSaver saver = new ArffSaver();
+        String pathFile =  path + "test.arff";
 
-        Instances newDataSet = new Instances(trainingSet,1);
+        try {
+            saver.setInstances(testDataSet);
+            saver.setFile(new File(pathFile));
+            saver.writeBatch();
+            testDataSet = new Instances(new BufferedReader(new FileReader(pathFile)));
+        }
+        catch(IOException ex){
+            ex.printStackTrace();
+        }
+    }
+
+    private Instances convertDataToWekaInstances(List<Data> testData){
+
+        Instances newDataSet = new Instances(trainingSet,testData.size());
         newDataSet.clear();
 
-        Instance newInstance = new DenseInstance(newDataSet.numAttributes());
-        newInstance.setDataset(newDataSet);
+        for(Data data: testData){
+            int  pos = 0;
+            Instance newInstance = new DenseInstance(newDataSet.numAttributes());
+            newInstance.setDataset(newDataSet);
 
-        int  pos = 0;
 
-        for (int i = 0; i < testData.binnedAxes.size(); i++){
-            for(int j = 0; j < testData.binnedAxes.get(i).size(); j++){
-                newInstance.setValue(pos, testData.binnedAxes.get(i).get(j));
-                pos++;
+            for (int i = 0; i < data.binnedAxes.size(); i++){
+                for(int j = 0; j < data.binnedAxes.get(i).size(); j++){
+                    newInstance.setValue(pos++, data.binnedAxes.get(i).get(j));
+                }
             }
+
+            for (int i = 0; i < data.avgAcceleration.size(); i++){
+                newInstance.setValue(pos++, data.avgAcceleration.get(i));
+            }
+
+            for (int i = 0; i < data.peaks.size(); i++){
+                newInstance.setValue(pos++, data.peaks.get(i));
+            }
+
+            for (int i = 0; i < data.avgDifAbs.size(); i++){
+                newInstance.setValue(pos++, data.avgDifAbs.get(i));
+            }
+
+            for (int i = 0; i < data.devStandard.size(); i++){
+                newInstance.setValue(pos++, data.devStandard.get(i));
+            }
+
+            newInstance.setValue(pos, data.resultant);
+
+            newDataSet.add(newInstance);
         }
-
-        for (int i = 0; i < testData.avgAcceleration.size(); i++){
-            newInstance.setValue(pos, testData.avgAcceleration.get(i));
-            pos++;
-        }
-
-        for (int i = 0; i < testData.peaks.size(); i++){
-            newInstance.setValue(pos, testData.peaks.get(i));
-            pos++;
-        }
-
-        for (int i = 0; i < testData.avgDifAbs.size(); i++){
-            newInstance.setValue(pos, testData.avgDifAbs.get(i));
-            pos++;
-        }
-
-        for (int i = 0; i < testData.devStandard.size(); i++){
-            newInstance.setValue(pos, testData.devStandard.get(i));
-            pos++;
-        }
-
-        newInstance.setValue(pos++, testData.resultant);
-
-        newDataSet.add(newInstance);
 
         return newDataSet;
     }
 
-    public void changeClass(Activity activity, Instances testDataSet){
-        Instance instance = testDataSet.firstInstance();
-        instance.setValue(testDataSet.attribute(testDataSet.numAttributes()-1),activity.toString());
-    }
-
-    public void startTestingSet(Accelerometer outPut){
-        Instances testDataSet = convertToInstances(outPut);
-        testDataSet.setClass(testDataSet.attribute(testDataSet.numAttributes()-1));
-        Activity predictedActivity = null;
+    public void startTestingSet(List<Data> outPut){
+        Instances testDataSet = convertDataToWekaInstances(outPut);
+        Attribute classAttribute = testDataSet.attribute(testDataSet.numAttributes()-1);
+        testDataSet.setClass(classAttribute);
 
         try {
-            for(Activity activity: Activity.values()){
-                changeClass(activity, testDataSet);
-                Evaluation evaluation = new Evaluation(trainingSet);
-                evaluation.evaluateModel(classifier, testDataSet);
-                double correct = evaluation.correct();
+            for (int i=0; i < testDataSet.numInstances(); i++){
+                Instance instance = testDataSet.get(i);
+                Activity predictedActivity = null;
 
-                if(correct == 1){
-                    predictedActivity = activity;
-                    break;
+                for(Activity activity: Activity.values()){
+                    instance.setValue(classAttribute, activity.toString());
+
+                    Evaluation evaluation = new Evaluation(trainingSet);
+                    evaluation.evaluateModelOnce(classifier, instance);
+
+                    if(evaluation.correct() == 1){
+                        predictedActivity = activity;
+                        break;
+                    }
+                }
+
+                if(predictedActivity == null){
+                    testDataSet.delete(i);
                 }
             }
+
         }
         catch(Exception ex){
             System.out.println(ex.toString());
         }
 
-        if(predictedActivity != null)
-            System.out.println("The Predicted Activity is: " + predictedActivity.toString());
-        else
-            System.out.println("Try again ....");
+        saveTestInstances(testDataSet);
     }
 
-    public static void main (String[] arg ){
-        Accelerometer output = new Accelerometer(5555);
+    public static void main (String[] arg){
+        Accelerometer output = new Accelerometer(5555,33);
         WekaModel model = new WekaModel();
-        model.startTestingSet(output);
+        model.startTestingSet(output.geData());
     }
 }
