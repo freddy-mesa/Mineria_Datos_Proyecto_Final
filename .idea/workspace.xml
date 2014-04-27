@@ -52,29 +52,15 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties converted="true" />
     <breakpoint_rules converted="true" />
+    <ui_properties converted="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="JavaFxApplication" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="WekaModel.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Weka/WekaModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.6821516" vertical-offset="195" max-vertical-offset="1836">
-              <caret line="121" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
-              <folding>
-                <element signature="method#WekaModel#0;class#WekaModel#0" expanded="false" />
-                <element signature="method#saveTestInstances#0;class#WekaModel#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -97,6 +83,12 @@
         <option value="$PROJECT_DIR$/src/Weka/Data.java" />
         <option value="$PROJECT_DIR$/src/Weka/DataPreparation.java" />
         <option value="$PROJECT_DIR$/src/Weka/Accelerometer.java" />
+        <option value="$PROJECT_DIR$/src/GUI/Model/Activities.java" />
+        <option value="$PROJECT_DIR$/src/GUI/Model/CalendarUtil.java" />
+        <option value="$PROJECT_DIR$/src/GUI/Model/UserActivities.java" />
+        <option value="$PROJECT_DIR$/src/GUI/Model/User.java" />
+        <option value="$PROJECT_DIR$/src/GUI/Model/XML_Database.java" />
+        <option value="$PROJECT_DIR$/src/GUI/Model/Activity.java" />
         <option value="$PROJECT_DIR$/src/Weka/WekaModel.java" />
       </list>
     </option>
@@ -136,7 +128,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -209,8 +200,31 @@
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mineria_Datos_Proyecto_Final" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mineria_Datos_Proyecto_Final" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GUI" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Model" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -278,6 +292,19 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -304,19 +331,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -441,10 +455,28 @@
       <ConfigurationWrapper RunnerId="Debug" />
       <method />
     </configuration>
-    <list size="3">
+    <configuration default="false" name="TestXML" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="GUI.Model.XML_Database" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="Mineria_Datos_ProyectoFinal" />
+      <envs />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Application.TestGUI" />
       <item index="1" class="java.lang.String" itemvalue="Application.TestWekaModel" />
       <item index="2" class="java.lang.String" itemvalue="Application.TestAccelerometer" />
+      <item index="3" class="java.lang.String" itemvalue="Application.TestXML" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -487,8 +519,8 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24963397" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32766616" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24963397" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3075734" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -518,7 +550,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="20" />
+      <option name="time" value="21" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -526,11 +558,24 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/Weka/WekaModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1836">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="method#WekaModel#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#saveTestInstances#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#convertDataToWekaInstances#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#startTestingSet#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#main#0;class#WekaModel#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI/GUIApp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="476">
           <caret line="19" column="33" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -541,6 +586,9 @@
           <folding>
             <element signature="method#WekaModel#0;class#WekaModel#0" expanded="false" />
             <element signature="method#saveTestInstances#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#convertDataToWekaInstances#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#startTestingSet#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#main#0;class#WekaModel#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -549,7 +597,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -573,6 +620,9 @@
           <folding>
             <element signature="method#WekaModel#0;class#WekaModel#0" expanded="false" />
             <element signature="method#saveTestInstances#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#convertDataToWekaInstances#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#startTestingSet#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#main#0;class#WekaModel#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -581,7 +631,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -605,6 +654,9 @@
           <folding>
             <element signature="method#WekaModel#0;class#WekaModel#0" expanded="false" />
             <element signature="method#saveTestInstances#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#convertDataToWekaInstances#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#startTestingSet#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#main#0;class#WekaModel#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -613,7 +665,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="493">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -637,6 +688,9 @@
           <folding>
             <element signature="method#WekaModel#0;class#WekaModel#0" expanded="false" />
             <element signature="method#saveTestInstances#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#convertDataToWekaInstances#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#startTestingSet#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#main#0;class#WekaModel#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -645,7 +699,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -669,6 +722,9 @@
           <folding>
             <element signature="method#WekaModel#0;class#WekaModel#0" expanded="false" />
             <element signature="method#saveTestInstances#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#convertDataToWekaInstances#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#startTestingSet#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#main#0;class#WekaModel#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -677,7 +733,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="493">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -701,6 +756,9 @@
           <folding>
             <element signature="method#WekaModel#0;class#WekaModel#0" expanded="false" />
             <element signature="method#saveTestInstances#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#convertDataToWekaInstances#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#startTestingSet#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#main#0;class#WekaModel#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -709,7 +767,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="425">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -717,7 +774,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="493">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -753,7 +809,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -761,7 +816,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334" vertical-offset="28679" max-vertical-offset="62560">
           <caret line="1837" column="30" selection-start-line="1837" selection-start-column="30" selection-end-line="1837" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -777,17 +831,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.93663913" vertical-offset="0" max-vertical-offset="731">
           <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#DataPreparation#0;class#DataPreparation#0" expanded="false" />
-            <element signature="method#Preparation#0;class#DataPreparation#0" expanded="false" />
-            <element signature="method#obtainAverage#0;class#DataPreparation#0" expanded="false" />
-            <element signature="method#axeBinnedDistribution#0;class#DataPreparation#0" expanded="false" />
-            <element signature="method#timeBetweenPeaks#0;class#DataPreparation#0" expanded="false" />
-            <element signature="method#promDifAbs#0;class#DataPreparation#0" expanded="false" />
-            <element signature="method#deviationStandard#0;class#DataPreparation#0" expanded="false" />
-            <element signature="method#resultant#0;class#DataPreparation#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -816,13 +859,74 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/Model/Activity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="47" max-vertical-offset="527">
+          <caret line="33" column="20" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="class#eActivity#0;class#Activity#0" expanded="false" />
+            <element signature="method#Activity#0;class#Activity#0" expanded="false" />
+            <element signature="method#Activity#1;class#Activity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/Model/UserActivities.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5971564" vertical-offset="139" max-vertical-offset="561">
+          <caret line="35" column="31" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#UserActivities#0;class#UserActivities#0" expanded="false" />
+            <element signature="method#UserActivities#1;class#UserActivities#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/Model/CalendarUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.51184833" vertical-offset="56" max-vertical-offset="918">
+          <caret line="16" column="88" selection-start-line="16" selection-start-column="88" selection-end-line="16" selection-end-column="88" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#format#0;class#CalendarUtil#0" expanded="false" />
+            <element signature="method#parse#0;class#CalendarUtil#0" expanded="false" />
+            <element signature="method#validString#0;class#CalendarUtil#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/Model/XML_Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5094787" vertical-offset="244" max-vertical-offset="1428">
+          <caret line="27" column="10" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/Model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48341233" vertical-offset="221" max-vertical-offset="816">
+          <caret line="25" column="10" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Weka/WekaModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.6821516" vertical-offset="195" max-vertical-offset="1836">
-          <caret line="121" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.8056872" vertical-offset="0" max-vertical-offset="476">
+          <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
           <folding>
             <element signature="method#WekaModel#0;class#WekaModel#0" expanded="false" />
             <element signature="method#saveTestInstances#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#convertDataToWekaInstances#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#startTestingSet#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#main#0;class#WekaModel#0" expanded="false" />
           </folding>
         </state>
       </provider>

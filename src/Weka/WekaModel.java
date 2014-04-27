@@ -1,5 +1,6 @@
 package Weka;
 
+import GUI.Model.Activity;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.trees.J48;
@@ -13,7 +14,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,10 +23,6 @@ public class WekaModel {
     private Instances trainingSet;
     private Classifier classifier;
     private String path;
-
-    public enum Activity{
-        Walking, Jogging, Upstairs, Downstairs, Sitting, Standing
-    }
 
     public WekaModel(){
         BufferedReader reader;
@@ -106,41 +102,35 @@ public class WekaModel {
 
     public void startTestingSet(List<Data> outPut){
         Instances testDataSet = convertDataToWekaInstances(outPut);
-        Attribute classAttribute = testDataSet.attribute(testDataSet.numAttributes()-1);
+        final Attribute classAttribute = testDataSet.attribute(testDataSet.numAttributes()-1);
         testDataSet.setClass(classAttribute);
 
         try {
             for (int i=0; i < testDataSet.numInstances(); i++){
                 Instance instance = testDataSet.get(i);
-                Activity predictedActivity = null;
 
-                for(Activity activity: Activity.values()){
+                for(Activity.eActivity activity: Activity.eActivity.values()){
+
                     instance.setValue(classAttribute, activity.toString());
+
+                    if(activity.equals(Activity.eActivity.Unknown)) break;
 
                     Evaluation evaluation = new Evaluation(trainingSet);
                     evaluation.evaluateModelOnce(classifier, instance);
 
-                    if(evaluation.correct() == 1){
-                        predictedActivity = activity;
-                        break;
-                    }
-                }
-
-                if(predictedActivity == null){
-                    testDataSet.delete(i);
+                    if(evaluation.correct() == 1) break;
                 }
             }
-
         }
         catch(Exception ex){
-            System.out.println(ex.toString());
+            ex.printStackTrace();
         }
 
         saveTestInstances(testDataSet);
     }
 
     public static void main (String[] arg){
-        Accelerometer output = new Accelerometer(5555,33);
+        Accelerometer output = new Accelerometer(5555,12);
         WekaModel model = new WekaModel();
         model.startTestingSet(output.geData());
     }

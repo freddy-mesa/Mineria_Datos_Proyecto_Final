@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:xmlDatabase xmlns:ns2="GUI.Model">
+    <ActivityList>
+        <Activity>
+            <activityName>Walking</activityName>
+            <metabolicEquivalent>9.0</metabolicEquivalent>
+        </Activity>
+        <Activity>
+            <activityName>Sitting</activityName>
+            <metabolicEquivalent>9.0</metabolicEquivalent>
+        </Activity>
+        <Activity>
+            <activityName>Standing</activityName>
+            <metabolicEquivalent>9.0</metabolicEquivalent>
+        </Activity>
+        <Activity>
+            <activityName>Jogging</activityName>
+            <metabolicEquivalent>9.0</metabolicEquivalent>
+        </Activity>
+        <Activity>
+            <activityName>Upstairs</activityName>
+            <metabolicEquivalent>9.0</metabolicEquivalent>
+        </Activity>
+        <Activity>
+            <activityName>Downstairs</activityName>
+            <metabolicEquivalent>9.0</metabolicEquivalent>
+        </Activity>
+    </ActivityList>
+    <UserList>
+        <User>
+            <name>Freddy Mesa</name>
+            <genre>Men</genre>
+            <birthday>1992-11-17</birthday>
+            <height>5.11</height>
+            <weight>180.0</weight>
+            <UserActivitiesList>
+                <UserActivities>
+                    <activityName>Walking</activityName>
+                    <calorieBurn>45.6</calorieBurn>
+                    <activityDate>2014-04-27 14:02:23</activityDate>
+                </UserActivities>
+                <UserActivities>
+                    <activityName>Sitting</activityName>
+                    <calorieBurn>14.8</calorieBurn>
+                    <activityDate>2014-04-27 13:34:56</activityDate>
+                </UserActivities>
+            </UserActivitiesList>
+        </User>
+    </UserList>
+</ns2:xmlDatabase>
