@@ -54,6 +54,12 @@ public class GUIApp extends Application {
         this.actualUser = user;
     }
 
+    public void addUserActivities(ObservableList<UserActivities> userActivitiesData){
+        for (UserActivities userActivity:userActivitiesData){
+            this.userActivitiesData.add(userActivity);
+        }
+    }
+
     public void showActivityView() {
         try {
             // Load the fxml file and set into the center of the main layout
@@ -65,7 +71,6 @@ public class GUIApp extends Application {
             ActivityController controller = loader.getController();
 
             controller.setMainApp(this);
-            controller.setPane(page);
 
         } catch (IOException e) {
             // Exception gets thrown if the fxml file could not be loaded

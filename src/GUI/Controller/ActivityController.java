@@ -7,26 +7,24 @@ import GUI.Model.UserActivities;
 import GUI.Model.XML_Database;
 import Weka.Accelerometer;
 import Weka.WekaModel;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.collections.ListChangeListener;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+import java.text.DecimalFormat;
 
 /**
  * Created by Freddy Mesa on 27-Apr-14.
  */
 public class ActivityController {
     private GUIApp guiApp;
-    private AnchorPane pane;
     private int totalTime;
     private XML_Database db;
+    private Accelerometer accelerometer;
 
     @FXML private TextField nameField;
     @FXML private TextField genreField;
@@ -34,6 +32,8 @@ public class ActivityController {
     @FXML private TextField heightField;
     @FXML private TextField weightField;
     @FXML private TextField timeField;
+    @FXML private ProgressBar progressBar;
+    @FXML private Label timeLabel;
 
     @FXML private TableView<UserActivities> userActivitiesTableView;
     @FXML private TableColumn<UserActivities, String> activitiesNameColumn;
@@ -45,26 +45,23 @@ public class ActivityController {
         userActivitiesTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         db = new XML_Database();
+        accelerometer = new Accelerometer(5555);
 
         autoWrite();
     }
 
     public void setMainApp(GUIApp guiApp) {
         this.guiApp = guiApp;
+
+        this.guiApp.getUserActivitiesData().addListener(new ListChangeListener<UserActivities>() {
+            @Override
+            public void onChanged(Change<? extends UserActivities> change) {
+                userActivitiesTableView.setItems(getMainApp().getUserActivitiesData());
+            }
+        });
     }
     public GUIApp getMainApp() {
         return guiApp;
-    }
-
-    public void setPane(AnchorPane pane) {
-        this.pane = pane;
-    }
-    public AnchorPane getPane() {
-        return pane;
-    }
-
-    @FXML private void handleButtonValidate(){
-
     }
 
     @FXML private void handleButtonStart(){
@@ -78,19 +75,57 @@ public class ActivityController {
 
             guiApp.addUser(user);
 
-            totalTime = Integer.parseInt(timeField.getText());
+            totalTime = Integer.parseInt(timeField.getText())+1;
 
+            StartProcessBarAndLabel();
             StartActivity();
         }
     }
 
+    private void StartProcessBarAndLabel(){
+        Task<Void> task = new Task<Void>() {
+            @Override public Void call() {
+                for (double i = 0.1; i <= totalTime-0.9; i+= 0.1) {
+                    try {
+                        Thread.sleep(99);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    updateProgress(i,totalTime-0.9);
+                    updateMessage(new DecimalFormat("#.#").format(i));
+                }
+                return null;
+            }
+        };
+
+        progressBar.progressProperty().bind(task.progressProperty());
+        timeLabel.textProperty().bind(task.messageProperty());
+
+        task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override public void handle(WorkerStateEvent workerStateEvent) {
+                progressBar.progressProperty().unbind();
+                timeLabel.textProperty().unbind();
+            }
+        });
+
+        new Thread(task).start();
+    }
+
     private void StartActivity(){
-        Accelerometer accelerometer = new Accelerometer(5555,totalTime);
-        WekaModel wekaModel = new WekaModel();
-        wekaModel.startTestingSet(accelerometer.geData());
-        User actualUser = guiApp.getActualUser();
-        actualUser.setUserActivities(wekaModel.getUserActivities(actualUser, db.activityList));
-        userActivitiesTableView.setItems(FXCollections.observableList(actualUser.userActivities));
+        Task task = new Task<Void>() {
+            @Override public Void call() {
+                accelerometer.setTotalSecondsTime(totalTime);
+                accelerometer.Start();
+                WekaModel wekaModel = new WekaModel();
+                wekaModel.startTestingSet(accelerometer.getData());
+                User actualUser = guiApp.getActualUser();
+                actualUser.setUserActivities(wekaModel.getUserActivities(actualUser, db.activityList));
+                guiApp.addUserActivities(FXCollections.observableList(actualUser.userActivities));
+                return null;
+            }
+        };
+
+        new Thread(task).start();
     }
 
     private void autoWrite(){

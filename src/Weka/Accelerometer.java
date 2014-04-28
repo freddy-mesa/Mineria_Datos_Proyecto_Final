@@ -20,22 +20,13 @@ public class Accelerometer{
 
     private List<Data> dataETL;
 
-    public Accelerometer(int Port, int TotalTime){
+    public Accelerometer(int Port){
         try{
             serverSocket = new DatagramSocket(Port);
-            totalSecondsTime = TotalTime;
         }
         catch(IOException ex){
             System.out.println(ex.toString());
         }
-
-        allAxes = Collections.synchronizedList(new ArrayList<ArrayList<ArrayList<Double>>>());
-        allAxesTime = Collections.synchronizedList(new ArrayList<ArrayList<ArrayList<Double>>>());
-        dataETL = Collections.synchronizedList(new ArrayList<Data>());
-
-        addNewArrayList();
-
-        this.Start();
     }
 
     private void addNewArrayList(){
@@ -50,8 +41,8 @@ public class Accelerometer{
         allAxesTime.get(allAxesTime.size()-1).add(new ArrayList<Double>());
     }
 
-    private void Start(){
-
+    public void Start(){
+        clearAll();
         double currentTime, currentTimeMills, tenSeconds = 0, time = System.currentTimeMillis();
         boolean isTenSeconds = false, startTime = true;
         byte[] receiveData = new byte[1024];
@@ -118,12 +109,30 @@ public class Accelerometer{
         }
     }
 
-    public List<Data> geData(){
+    public List<Data> getData(){
         return this.dataETL;
     }
 
+    private void clearAll(){
+        allAxes = null;
+        allAxesTime = null;
+        dataETL = null;
+
+        allAxes = Collections.synchronizedList(new ArrayList<ArrayList<ArrayList<Double>>>());
+        allAxesTime = Collections.synchronizedList(new ArrayList<ArrayList<ArrayList<Double>>>());
+        dataETL = Collections.synchronizedList(new ArrayList<Data>());
+
+        addNewArrayList();
+    }
+
+    public void setTotalSecondsTime(int totalSecondsTime){
+        this.totalSecondsTime = totalSecondsTime;
+    }
+
     static public void main(String[] arg){
-        Accelerometer temp = new Accelerometer(5555,65);
+        Accelerometer temp = new Accelerometer(5555);
+        temp.setTotalSecondsTime(65);
+        temp.Start();
     }
 }
 

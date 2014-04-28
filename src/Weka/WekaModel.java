@@ -154,8 +154,10 @@ public class WekaModel {
     }
 
     public static void main (String[] arg){
-        Accelerometer output = new Accelerometer(5555,12);
+        Accelerometer output = new Accelerometer(5555);
+        output.setTotalSecondsTime(31);
+        output.Start();
         WekaModel model = new WekaModel();
-        model.startTestingSet(output.geData());
+        model.startTestingSet(output.getData());
     }
 }
