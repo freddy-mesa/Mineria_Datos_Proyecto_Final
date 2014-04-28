@@ -3,19 +3,19 @@
     <ActivityList>
         <Activity>
             <activityName>Walking</activityName>
-            <metabolicEquivalent>9.0</metabolicEquivalent>
+            <metabolicEquivalent>4.0</metabolicEquivalent>
         </Activity>
         <Activity>
             <activityName>Sitting</activityName>
-            <metabolicEquivalent>9.0</metabolicEquivalent>
+            <metabolicEquivalent>1.5</metabolicEquivalent>
         </Activity>
         <Activity>
             <activityName>Standing</activityName>
-            <metabolicEquivalent>9.0</metabolicEquivalent>
+            <metabolicEquivalent>1.2</metabolicEquivalent>
         </Activity>
         <Activity>
             <activityName>Jogging</activityName>
-            <metabolicEquivalent>9.0</metabolicEquivalent>
+            <metabolicEquivalent>7.0</metabolicEquivalent>
         </Activity>
         <Activity>
             <activityName>Upstairs</activityName>
@@ -23,26 +23,61 @@
         </Activity>
         <Activity>
             <activityName>Downstairs</activityName>
-            <metabolicEquivalent>9.0</metabolicEquivalent>
+            <metabolicEquivalent>3.0</metabolicEquivalent>
         </Activity>
     </ActivityList>
     <UserList>
         <User>
             <name>Freddy Mesa</name>
-            <genre>Men</genre>
+            <genre>Man</genre>
             <birthday>1992-11-17</birthday>
             <height>5.11</height>
             <weight>180.0</weight>
             <UserActivitiesList>
                 <UserActivities>
-                    <activityName>Walking</activityName>
-                    <calorieBurn>45.6</calorieBurn>
-                    <activityDate>2014-04-27 14:02:23</activityDate>
+                    <activityName>Sitting</activityName>
+                    <calorieBurn>0.7922934895833332</calorieBurn>
                 </UserActivities>
                 <UserActivities>
                     <activityName>Sitting</activityName>
-                    <calorieBurn>14.8</calorieBurn>
-                    <activityDate>2014-04-27 13:34:56</activityDate>
+                    <calorieBurn>0.7922934895833332</calorieBurn>
+                </UserActivities>
+                <UserActivities>
+                    <activityName>Sitting</activityName>
+                    <calorieBurn>0.7922934895833332</calorieBurn>
+                </UserActivities>
+                <UserActivities>
+                    <activityName>Upstairs</activityName>
+                    <calorieBurn>4.753760937499999</calorieBurn>
+                </UserActivities>
+                <UserActivities>
+                    <activityName>Standing</activityName>
+                    <calorieBurn>0.6338347916666667</calorieBurn>
+                </UserActivities>
+            </UserActivitiesList>
+        </User>
+        <User>
+            <name>Maria Candelario</name>
+            <genre>Woman</genre>
+            <birthday>1990-05-23</birthday>
+            <height>5.5</height>
+            <weight>140.0</weight>
+            <UserActivitiesList>
+                <UserActivities>
+                    <activityName>Sitting</activityName>
+                    <calorieBurn>0.6356690680555556</calorieBurn>
+                </UserActivities>
+                <UserActivities>
+                    <activityName>Sitting</activityName>
+                    <calorieBurn>0.6356690680555556</calorieBurn>
+                </UserActivities>
+                <UserActivities>
+                    <activityName>Sitting</activityName>
+                    <calorieBurn>0.6356690680555556</calorieBurn>
+                </UserActivities>
+                <UserActivities>
+                    <activityName>Sitting</activityName>
+                    <calorieBurn>0.6356690680555556</calorieBurn>
                 </UserActivities>
             </UserActivitiesList>
         </User>

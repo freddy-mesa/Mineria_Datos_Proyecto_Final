@@ -65,7 +65,11 @@ public class User {
         this.userActivities = userActivitiesList;
     }
 
-    public void addUserActivity(UserActivities userActivities){
-        this.userActivities.add(userActivities);
+    public void addUserActivity(ObservableList<UserActivities> userActivities){
+        this.userActivities.clear();
+
+        for(UserActivities activities:userActivities){
+            this.userActivities.add(activities);
+        }
     }
 }

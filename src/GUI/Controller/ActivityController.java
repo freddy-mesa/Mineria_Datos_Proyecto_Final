@@ -9,6 +9,7 @@ import Weka.Accelerometer;
 import Weka.WekaModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
@@ -45,23 +46,29 @@ public class ActivityController {
         userActivitiesTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         db = new XML_Database();
-        accelerometer = new Accelerometer(5555);
+        db.loadDB();
 
-        autoWrite();
+        accelerometer = new Accelerometer(5555);
     }
 
     public void setMainApp(GUIApp guiApp) {
         this.guiApp = guiApp;
 
+        setUserActivitiesTableViewData();
+    }
+
+    public GUIApp getMainApp() {
+        return guiApp;
+    }
+
+    public void setUserActivitiesTableViewData(){
+        userActivitiesTableView.setItems(getMainApp().getUserActivitiesData());
         this.guiApp.getUserActivitiesData().addListener(new ListChangeListener<UserActivities>() {
             @Override
             public void onChanged(Change<? extends UserActivities> change) {
                 userActivitiesTableView.setItems(getMainApp().getUserActivitiesData());
             }
         });
-    }
-    public GUIApp getMainApp() {
-        return guiApp;
     }
 
     @FXML private void handleButtonStart(){
@@ -73,7 +80,7 @@ public class ActivityController {
             user.setHeight(Double.parseDouble(heightField.getText()));
             user.setWeight(Double.parseDouble(weightField.getText()));
 
-            guiApp.addUser(user);
+            guiApp.setActualUser(user);
 
             totalTime = Integer.parseInt(timeField.getText())+1;
 
@@ -82,16 +89,49 @@ public class ActivityController {
         }
     }
 
+    @FXML private void handleButtonLoad(){
+        boolean isSelected = guiApp.showLoadUser();
+
+        if(isSelected){
+            guiApp.setUserActivitiesData(FXCollections.observableArrayList(guiApp.getActualUser().userActivities));
+            setUserDataToFields(guiApp.getActualUser());
+            userActivitiesTableView.setItems(getMainApp().getUserActivitiesData());
+        }
+    }
+
+    @FXML private void handleButtonSave(){
+        guiApp.save();
+
+        Dialogs.showInformationDialog(this.guiApp.primaryStage, "User has been saved", "Saved", "Information Dialog");
+    }
+
+    @FXML private void handleButtonClear(){
+        nameField.setText("");
+        genreField.setText("");
+        birthdayField.setText("");
+        heightField.setText("");
+        weightField.setText("");
+        timeField.setText("");
+
+        guiApp.setActualUser(new User());
+        ObservableList<UserActivities> temp = guiApp.getUserActivitiesData();
+        temp.clear();
+    }
+
+    @FXML private void handleButtonCharts(){
+
+    }
+
     private void StartProcessBarAndLabel(){
         Task<Void> task = new Task<Void>() {
             @Override public Void call() {
-                for (double i = 0.1; i <= totalTime-0.9; i+= 0.1) {
+                for (double i = 0.1; i <= totalTime-1; i+= 0.1) {
                     try {
                         Thread.sleep(99);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    updateProgress(i,totalTime-0.9);
+                    updateProgress(i,totalTime-1);
                     updateMessage(new DecimalFormat("#.#").format(i));
                 }
                 return null;
@@ -128,21 +168,17 @@ public class ActivityController {
         new Thread(task).start();
     }
 
-    private void autoWrite(){
-        nameField.setText("Freddy Mesa");
-        genreField.setText("Man");
-        birthdayField.setText("1992-11-17");
-        heightField.setText("5.11");
-        weightField.setText("180");
-        timeField.setText("31");
+    private void setUserDataToFields(User user){
+        nameField.setText(user.getName());
+        genreField.setText(user.getGenre());
+        birthdayField.setText(user.getBirthday());
+        heightField.setText(String.valueOf(user.getHeight()));
+        weightField.setText(String.valueOf(user.getWeight()));
+        timeField.setText("");
     }
 
     private boolean isInputValid() {
         String errorMessage = "";
-
-        if (timeField.getText() == null || timeField.getText().length() == 0) {
-            errorMessage += "No valid Name!\n";
-        }
 
         if (nameField.getText() == null || nameField.getText().length() == 0) {
             errorMessage += "No valid Name!\n";
@@ -181,6 +217,10 @@ public class ActivityController {
             } catch (NumberFormatException e) {
                 errorMessage += "No valid Weight!\n";
             }
+        }
+
+        if (timeField.getText() == null || timeField.getText().length() == 0) {
+            errorMessage += "No valid Time!\n";
         }
 
         if (errorMessage.length() == 0) {

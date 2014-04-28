@@ -48,13 +48,14 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <Button layoutX="478.0" layoutY="41.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="103.0" text="Save">
+            <Button layoutX="478.0" layoutY="68.0" mnemonicParsing="false" onAction="#handleButtonSave" prefHeight="30.0" prefWidth="119.0" text="Save">
               <font>
                 <Font name="System Bold" size="16.0" fx:id="x2" />
               </font>
             </Button>
-            <Button font="$x2" layoutX="478.0" layoutY="90.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="103.0" text="Load" />
-            <Button font="$x2" layoutX="478.0" layoutY="138.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="103.0" text="Charts" />
+            <Button font="$x2" layoutX="478.0" layoutY="117.0" mnemonicParsing="false" onAction="#handleButtonLoad" prefHeight="30.0" prefWidth="119.0" text="Load" />
+            <Button font="$x2" layoutX="478.0" layoutY="165.0" mnemonicParsing="false" onAction="#handleButtonCharts" prefHeight="30.0" prefWidth="119.0" text="Charts" />
+            <Button font="$x2" layoutX="478.0" layoutY="19.0" mnemonicParsing="false" onAction="#handleButtonClear" prefHeight="30.0" prefWidth="119.0" text="Clear" />
           </children>
         </AnchorPane>
         <SplitPane dividerPositions="0.32861635220125784" focusTraversable="true" prefHeight="300.0" prefWidth="600.0" visible="true">

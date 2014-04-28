@@ -3,10 +3,13 @@ package GUI.Model;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,13 +31,7 @@ public class XML_Database {
     public List<User> userList;
 
     public XML_Database(){
-        activityList = new ArrayList<>();
-        activityList.add(new Activity(Activity.eActivity.Walking.toString(),4.0));
-        activityList.add(new Activity(Activity.eActivity.Sitting.toString(),1.5));
-        activityList.add(new Activity(Activity.eActivity.Standing.toString(),1.2));
-        activityList.add(new Activity(Activity.eActivity.Jogging.toString(),7.0));
-        activityList.add(new Activity(Activity.eActivity.Upstairs.toString(),9.0));
-        activityList.add(new Activity(Activity.eActivity.Downstairs.toString(),3.0));
+
     }
 
     public void setActivityList(List<Activity> activityList){
@@ -44,35 +41,56 @@ public class XML_Database {
         this.userList = userList;
     }
 
+    public void loadDB(){
+        try{
+            JAXBContext context = JAXBContext.newInstance(XML_Database.class);
+            Unmarshaller um = context.createUnmarshaller();
+            XML_Database db = (XML_Database) um.unmarshal(new FileReader(databasePath));
+
+            if(db.userList != null)
+                this.setUserList(db.userList);
+            else
+                this.userList = new ArrayList<>();
+
+            this.setActivityList(db.activityList);
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void saveDB(){
+
+        try{
+            JAXBContext context = JAXBContext.newInstance(XML_Database.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+            // Write to System.out
+            m.marshal(this, System.out);
+
+            // Write to File
+            m.marshal(this, new File(XML_Database.databasePath));
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args){
         XML_Database db = new XML_Database();
 
         List<Activity> activities = new ArrayList<>();
-        activities.add(new Activity(Activity.eActivity.Walking.toString(),9.0));
-        activities.add(new Activity(Activity.eActivity.Sitting.toString(),9.0));
-        activities.add(new Activity(Activity.eActivity.Standing.toString(),9.0));
-        activities.add(new Activity(Activity.eActivity.Jogging.toString(),9.0));
+        activities.add(new Activity(Activity.eActivity.Walking.toString(),4.0));
+        activities.add(new Activity(Activity.eActivity.Sitting.toString(),1.5));
+        activities.add(new Activity(Activity.eActivity.Standing.toString(),1.2));
+        activities.add(new Activity(Activity.eActivity.Jogging.toString(),7.0));
         activities.add(new Activity(Activity.eActivity.Upstairs.toString(),9.0));
-        activities.add(new Activity(Activity.eActivity.Downstairs.toString(),9.0));
+        activities.add(new Activity(Activity.eActivity.Downstairs.toString(),3.0));
 
         db.setActivityList(activities);
-
-        List<User> users = new ArrayList<>();
-        User user1 = new User();
-        user1.setName("Freddy Mesa");
-        user1.setBirthday("1992-11-17");
-        user1.setGenre("Man");
-        user1.setHeight(5.11);
-        user1.setWeight(180);
-
-        List<UserActivities> userActivitiesList = new ArrayList<>();
-        userActivitiesList.add(new UserActivities(Activity.eActivity.Walking.toString(), 45.6, "2014-04-27 14:02:23"));
-        userActivitiesList.add(new UserActivities(Activity.eActivity.Sitting.toString(), 14.8, "2014-04-27 13:34:56"));
-        user1.setUserActivities(userActivitiesList);
-
-        users.add(user1);
-
-        db.setUserList(users);
 
         try {
             JAXBContext context = JAXBContext.newInstance(XML_Database.class);
