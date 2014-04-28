@@ -119,7 +119,7 @@ public class ActivityController {
     }
 
     @FXML private void handleButtonCharts(){
-
+        guiApp.showCharts();
     }
 
     private void StartProcessBarAndLabel(){

@@ -1,6 +1,7 @@
 package GUI;
 
 import GUI.Controller.ActivityController;
+import GUI.Controller.ChartsController;
 import GUI.Controller.LoadUserController;
 import GUI.Model.User;
 import GUI.Model.UserActivities;
@@ -115,6 +116,31 @@ public class GUIApp extends Application {
             // Exception gets thrown if the fxml file could not be loaded
             e.printStackTrace();
             return false;
+        }
+    }
+
+    public void showCharts(){
+        try {
+            // Load the fxml file and create a new stage for the popup
+            FXMLLoader loader = new FXMLLoader(GUIApp.class.getResource("view/ChartsView.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Charts");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            dialogStage.setScene( new Scene(page));
+
+            // Set the person into the controller
+            ChartsController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.init(getActualUser());
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+        } catch (IOException e) {
+            // Exception gets thrown if the fxml file could not be loaded
+            e.printStackTrace();
         }
     }
 
