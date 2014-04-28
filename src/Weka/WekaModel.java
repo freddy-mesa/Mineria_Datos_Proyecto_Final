@@ -1,6 +1,8 @@
 package Weka;
 
 import GUI.Model.Activity;
+import GUI.Model.User;
+import GUI.Model.UserActivities;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.trees.J48;
@@ -14,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +26,7 @@ public class WekaModel {
     private Instances trainingSet;
     private Classifier classifier;
     private String path;
+    private Instances testingSet;
 
     public WekaModel(){
         BufferedReader reader;
@@ -126,7 +130,27 @@ public class WekaModel {
             ex.printStackTrace();
         }
 
-        saveTestInstances(testDataSet);
+        setTestSet(testDataSet);
+        //saveTestInstances(testDataSet);
+    }
+
+    public void setTestSet(Instances testSet) {
+        this.testingSet = testSet;
+    }
+
+    public List<UserActivities> getUserActivities(User user,List<Activity> activityList){
+        List<UserActivities> userActivitiesList = new ArrayList<>();
+        final Attribute classAttribute = testingSet.attribute(testingSet.numAttributes()-1);
+
+        for(Instance instance:testingSet){
+            UserActivities userActivities = new UserActivities();
+            userActivities.setActivityName(instance.stringValue(classAttribute));
+            userActivities.setCalorieBurn(userActivities.calculateCaloriesBurn(user,activityList));
+
+            userActivitiesList.add(userActivities);
+        }
+
+        return userActivitiesList;
     }
 
     public static void main (String[] arg){

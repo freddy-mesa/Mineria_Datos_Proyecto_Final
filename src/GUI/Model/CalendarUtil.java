@@ -14,7 +14,7 @@ public class CalendarUtil {
      * Default date format in the form 2013-03-18.
      */
     private static final SimpleDateFormat DATE_FORMAT_BIRTHDAY = new SimpleDateFormat("yyyy-MM-dd");
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("mm:ss");
 
     /**
      * Returns the given date as a well formatted string. The above defined date
@@ -76,5 +76,21 @@ public class CalendarUtil {
         }
 
         return true;
+    }
+
+    public static int getAge(String dateString, boolean isBirthday){
+        Calendar dob = parse(dateString,isBirthday);
+        Calendar today = Calendar.getInstance();
+
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+
+        if (today.get(Calendar.MONTH) < dob.get(Calendar.MONTH)) {
+            age--;
+        } else if (today.get(Calendar.MONTH) == dob.get(Calendar.MONTH)
+                && today.get(Calendar.DAY_OF_MONTH) < dob.get(Calendar.DAY_OF_MONTH)) {
+            age--;
+        }
+
+        return age;
     }
 }

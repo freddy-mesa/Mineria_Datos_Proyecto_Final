@@ -2,6 +2,7 @@ package GUI.Model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.List;
 
 /**
  * Created by Freddy Mesa on 27-Apr-14.
@@ -41,5 +42,32 @@ public class UserActivities {
     }
     public void setActivityDate(String activityDate){
         this.activityDate = activityDate;
+    }
+
+    public double calculateCaloriesBurn(User user, List<Activity> activities){
+        double resp = 0;
+
+        for (Activity activity:activities){
+            if(activityName.equals(activity.getActivityName())){
+                if (user.getGenre().equals("Man")){
+                    double BasalMetabolicRate = (13.75 * user.getWeight()*0.453592)
+                                                +(5 * user.getHeight()*30.48)
+                                                -(6.76 * CalendarUtil.getAge(user.getBirthday(),true)) + 66;
+
+                    resp = (BasalMetabolicRate/(24)) * activity.getMetabolicEquivalent() * (10.0/(60*24));
+                    break;
+                }
+                else {
+                    double BasalMetabolicRate = (9.56  * user.getWeight()*0.453592)
+                            +(1.85 * user.getHeight()*30.48)
+                            -(4.68 * CalendarUtil.getAge(user.getBirthday(),true)) + 655;
+
+                    resp = (BasalMetabolicRate/(24)) * activity.getMetabolicEquivalent() * (10.0/(60*24));
+                    break;
+                }
+            }
+        }
+
+        return resp;
     }
 }

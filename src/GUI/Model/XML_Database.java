@@ -27,6 +27,16 @@ public class XML_Database {
     @XmlElement(name = "User")
     public List<User> userList;
 
+    public XML_Database(){
+        activityList = new ArrayList<>();
+        activityList.add(new Activity(Activity.eActivity.Walking.toString(),4.0));
+        activityList.add(new Activity(Activity.eActivity.Sitting.toString(),1.5));
+        activityList.add(new Activity(Activity.eActivity.Standing.toString(),1.2));
+        activityList.add(new Activity(Activity.eActivity.Jogging.toString(),7.0));
+        activityList.add(new Activity(Activity.eActivity.Upstairs.toString(),9.0));
+        activityList.add(new Activity(Activity.eActivity.Downstairs.toString(),3.0));
+    }
+
     public void setActivityList(List<Activity> activityList){
         this.activityList = activityList;
     }
@@ -51,7 +61,7 @@ public class XML_Database {
         User user1 = new User();
         user1.setName("Freddy Mesa");
         user1.setBirthday("1992-11-17");
-        user1.setGenre("Men");
+        user1.setGenre("Man");
         user1.setHeight(5.11);
         user1.setWeight(180);
 

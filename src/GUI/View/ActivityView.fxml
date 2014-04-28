@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="520.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="GUI.Controller.ActivityController">
+  <children>
+    <SplitPane dividerPositions="0.4247104247104247" focusTraversable="true" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <children>
+            <GridPane layoutX="14.0" layoutY="14.0" prefHeight="189.0" prefWidth="396.0">
+              <children>
+                <Label text="Name" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                  <font>
+                    <Font size="16.0" fx:id="x1" />
+                  </font>
+                </Label>
+                <Label font="$x1" text="Genre (Man,Woman)" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label font="$x1" text="Birthday (yyyy-MM-dd)" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label font="$x1" text="Height (feets)" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <Label font="$x1" text="Weight (pounds)" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <Label font="$x1" text="Time (Min)" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <TextField fx:id="nameField" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <TextField id="nameField" fx:id="genreField" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="birthdayField" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="heightField" prefWidth="291.0" GridPane.columnIndex="1" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="3" />
+                <TextField fx:id="weightField" prefWidth="59.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <TextField id="weightField" fx:id="timeField" prefWidth="59.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.0" minWidth="10.0" prefWidth="175.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="350.0" minWidth="10.0" prefWidth="221.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints fillHeight="true" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <Button layoutX="478.0" layoutY="41.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="103.0" text="Save">
+              <font>
+                <Font name="System Bold" size="16.0" fx:id="x2" />
+              </font>
+            </Button>
+            <Button font="$x2" layoutX="478.0" layoutY="90.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="103.0" text="Load" />
+            <Button font="$x2" layoutX="478.0" layoutY="138.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="103.0" text="Charts" />
+          </children>
+        </AnchorPane>
+        <SplitPane dividerPositions="0.32861635220125784" focusTraversable="true" prefHeight="300.0" prefWidth="600.0" visible="true">
+          <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" visible="true">
+              <children>
+                <Button font="$x2" layoutX="50.0" layoutY="126.0" mnemonicParsing="false" onAction="#handleButtonStart" prefHeight="95.0" prefWidth="106.0" text="Start" />
+                <ProgressBar layoutX="14.0" layoutY="58.0" prefHeight="25.0" prefWidth="178.0" progress="0.0" />
+                <Label font="$x2" layoutX="87.0" layoutY="36.0" text="0.00" textFill="#ff6433" />
+              </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="298.0" prefWidth="347.0">
+              <children>
+                <TableView fx:id="userActivitiesTableView" layoutX="14.0" layoutY="14.0" prefHeight="270.0" prefWidth="396.0">
+                  <columns>
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="228.0" text="Activity" fx:id="activitiesNameColumn" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="166.0" text="Calories Burn/Hour" fx:id="caloriesBurnColumn" />
+                  </columns>
+                </TableView>
+              </children>
+            </AnchorPane>
+          </items>
+        </SplitPane>
+      </items>
+    </SplitPane>
+  </children>
+</AnchorPane>
