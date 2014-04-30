@@ -44,5 +44,30 @@
                 </UserActivities>
             </UserActivitiesList>
         </User>
+        <User>
+            <name>Freddy Mesa</name>
+            <genre>Man</genre>
+            <birthday>1992-11-17</birthday>
+            <height>5.11</height>
+            <weight>180.0</weight>
+            <UserActivitiesList>
+                <UserActivities>
+                    <activityName>Downstairs</activityName>
+                    <calorieBurn>1.5845869791666665</calorieBurn>
+                </UserActivities>
+                <UserActivities>
+                    <activityName>Downstairs</activityName>
+                    <calorieBurn>1.5845869791666665</calorieBurn>
+                </UserActivities>
+                <UserActivities>
+                    <activityName>Standing</activityName>
+                    <calorieBurn>0.6338347916666667</calorieBurn>
+                </UserActivities>
+                <UserActivities>
+                    <activityName>Standing</activityName>
+                    <calorieBurn>0.6338347916666667</calorieBurn>
+                </UserActivities>
+            </UserActivitiesList>
+        </User>
     </UserList>
 </ns2:xmlDatabase>

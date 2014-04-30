@@ -65,24 +65,7 @@
     <favorites_list name="JavaFxApplication" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="WekaModel.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Weka/WekaModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6789216" vertical-offset="2188" max-vertical-offset="2788">
-              <caret line="242" column="36" selection-start-line="242" selection-start-column="36" selection-end-line="242" selection-end-column="36" />
-              <folding>
-                <element signature="method#saveTestInstances#0;class#WekaModel#0" expanded="false" />
-                <element signature="method#loadTest#0;class#WekaModel#0" expanded="false" />
-                <element signature="method#convertDataToWekaInstances#0;class#WekaModel#0" expanded="false" />
-                <element signature="method#addInstancesToTestSet#0;class#WekaModel#0" expanded="false" />
-                <element signature="method#getUserActivities#0;class#WekaModel#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -611,7 +594,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -631,7 +614,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25755286" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30670926" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30670926" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1056,14 +1039,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Weka/WekaModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6789216" vertical-offset="2188" max-vertical-offset="2788">
-          <caret line="242" column="36" selection-start-line="242" selection-start-column="36" selection-end-line="242" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.45833334" vertical-offset="0" max-vertical-offset="1394">
+          <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
           <folding>
+            <element signature="method#WekaModel#0;class#WekaModel#0" expanded="false" />
             <element signature="method#saveTestInstances#0;class#WekaModel#0" expanded="false" />
             <element signature="method#loadTest#0;class#WekaModel#0" expanded="false" />
             <element signature="method#convertDataToWekaInstances#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#startTestingSet#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#populatedTestSet#0;class#WekaModel#0" expanded="false" />
             <element signature="method#addInstancesToTestSet#0;class#WekaModel#0" expanded="false" />
             <element signature="method#getUserActivities#0;class#WekaModel#0" expanded="false" />
+            <element signature="method#main#0;class#WekaModel#0" expanded="false" />
           </folding>
         </state>
       </provider>

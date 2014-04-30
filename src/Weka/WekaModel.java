@@ -10,7 +10,6 @@ import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.converters.ArffSaver;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -32,7 +31,7 @@ public class WekaModel {
         path = System.getProperties().getProperty("user.dir") + "\\src\\Source\\";
 
         try{
-            reader = new BufferedReader(new FileReader(path + "test.arff"));
+            reader = new BufferedReader(new FileReader(path + "train.arff"));
             trainingSet = new Instances(reader);
             trainingSet.setClassIndex(trainingSet.numAttributes()-1);
 
@@ -71,7 +70,7 @@ public class WekaModel {
      */
     private void loadTest(){
         try{
-            BufferedReader reader = new BufferedReader(new FileReader(path + "test.arff"));
+            BufferedReader reader = new BufferedReader(new FileReader(path + "train.arff"));
             testingSet = new Instances(reader);
             testingSet.setClassIndex(testingSet.numAttributes()-1);
         }
@@ -195,7 +194,7 @@ public class WekaModel {
                 if(type == 1)
                     instance.setValue(classAttribute, Activity.eActivity.Upstairs.toString());
                 else
-                    instance.setValue(classAttribute, Activity.eActivity.Sitting.toString());
+                    instance.setValue(classAttribute, Activity.eActivity.Jogging.toString());
             }
         }
         catch(Exception ex){
@@ -240,7 +239,7 @@ public class WekaModel {
     public static void main (String[] arg){
 
         Accelerometer output = new Accelerometer(5555);
-        output.setTotalSecondsTime(121);
+        output.setTotalSecondsTime(31);
         output.Start();
         WekaModel model = new WekaModel();
         //model.startTestingSet(output.getData());
