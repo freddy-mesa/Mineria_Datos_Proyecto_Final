@@ -13,7 +13,7 @@ public class Activity {
     private String activityName;
     private double metabolicEquivalent;
     public static enum eActivity{
-        Walking, Jogging, Upstairs, Downstairs, Sitting, Standing, Unknown
+        Walking, Jogging, Upstairs, Downstairs, Sitting, Standing
     }
 
     public Activity(){

@@ -3,9 +3,6 @@ package Weka;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- * Created by Freddy Mesa on 26-Apr-14.
- */
 public class Data {
     public ArrayList<ArrayList<Double>> binnedAxes;
     public ArrayList<Double> avgAcceleration;

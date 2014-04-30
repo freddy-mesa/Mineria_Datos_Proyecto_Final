@@ -82,7 +82,7 @@ public class ActivityController {
 
             guiApp.setActualUser(user);
 
-            totalTime = Integer.parseInt(timeField.getText())+1;
+            totalTime = Integer.parseInt(timeField.getText());
 
             StartProcessBarAndLabel();
             StartActivity();
@@ -125,16 +125,19 @@ public class ActivityController {
     private void StartProcessBarAndLabel(){
         Task<Void> task = new Task<Void>() {
             @Override public Void call() {
-                for (double i = 0.1; i <= totalTime-1; i+= 0.1) {
-                    try {
+                try {
+                    Thread.sleep(totalTime/10 * 1000);
+                    for (double i = 0.1; i <= totalTime; i+= 0.1) {
                         Thread.sleep(99);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+
+                        updateProgress(i,totalTime+0.1);
+                        updateMessage(new DecimalFormat("#.#").format(i));
                     }
-                    updateProgress(i,totalTime-1);
-                    updateMessage(new DecimalFormat("#.#").format(i));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
                 return null;
+
             }
         };
 
@@ -154,7 +157,7 @@ public class ActivityController {
     private void StartActivity(){
         Task task = new Task<Void>() {
             @Override public Void call() {
-                accelerometer.setTotalSecondsTime(totalTime);
+                accelerometer.setTotalSecondsTime(totalTime+1);
                 accelerometer.Start();
                 WekaModel wekaModel = new WekaModel();
                 wekaModel.startTestingSet(accelerometer.getData());

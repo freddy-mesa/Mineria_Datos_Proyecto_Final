@@ -12,28 +12,27 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ArffSaver;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Freddy Mesa on 15-Apr-14.
- */
 public class WekaModel {
     private Instances trainingSet;
     private Classifier classifier;
     private String path;
     private Instances testingSet;
 
+    /***
+     * Constructor de la Clase
+     * Carga el archivo de Train y lo instancia en trainingSet
+     * Tambien instancia el clasificador J48
+     */
     public WekaModel(){
         BufferedReader reader;
         path = System.getProperties().getProperty("user.dir") + "\\src\\Source\\";
 
         try{
-            reader = new BufferedReader(new FileReader(path + "train.arff"));
+            reader = new BufferedReader(new FileReader(path + "test.arff"));
             trainingSet = new Instances(reader);
             trainingSet.setClassIndex(trainingSet.numAttributes()-1);
 
@@ -48,21 +47,48 @@ public class WekaModel {
         }
     }
 
-    private void saveTestInstances(Instances testDataSet){
-        ArffSaver saver = new ArffSaver();
+    /***
+     * Salva el trainingSet
+     * Modulo de ETL (Cargar, Transformar y Predecir)
+     */
+    private void saveTestInstances(){
+        BufferedWriter saver;
         String pathFile =  path + "test.arff";
 
         try {
-            saver.setInstances(testDataSet);
-            saver.setFile(new File(pathFile));
-            saver.writeBatch();
-            testDataSet = new Instances(new BufferedReader(new FileReader(pathFile)));
+            saver = new BufferedWriter(new FileWriter(pathFile));
+            saver.write(this.testingSet.toString());
+            saver.flush();
+            saver.close();
         }
         catch(IOException ex){
             ex.printStackTrace();
         }
     }
 
+    /***
+     * Carga el trainingSet
+     */
+    private void loadTest(){
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader(path + "test.arff"));
+            testingSet = new Instances(reader);
+            testingSet.setClassIndex(testingSet.numAttributes()-1);
+        }
+        catch(IOException ex){
+            ex.printStackTrace();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /***
+     * Agrega los datos ya preparados a un conjunto de datos (testingSet)
+     * Modulo de ETL (Cargar, Transformar y Predecir)
+     * @param testData lista de Datos Preparados
+     * @return retorna el testingSet
+     */
     private Instances convertDataToWekaInstances(List<Data> testData){
 
         Instances newDataSet = new Instances(trainingSet,testData.size());
@@ -104,10 +130,17 @@ public class WekaModel {
         return newDataSet;
     }
 
+    /***
+     * Comprueba con el clasificador y determina cual es la actividad correcta
+     * Modulo de ETL (Cargar, Transformar y Predecir)
+     * @param outPut lista de Datos Preparados
+     */
     public void startTestingSet(List<Data> outPut){
         Instances testDataSet = convertDataToWekaInstances(outPut);
         final Attribute classAttribute = testDataSet.attribute(testDataSet.numAttributes()-1);
         testDataSet.setClass(classAttribute);
+        List<String> elist = new ArrayList<>();
+        List<Double> eListRate = new ArrayList<>();
 
         try {
             for (int i=0; i < testDataSet.numInstances(); i++){
@@ -117,13 +150,25 @@ public class WekaModel {
 
                     instance.setValue(classAttribute, activity.toString());
 
-                    if(activity.equals(Activity.eActivity.Unknown)) break;
-
                     Evaluation evaluation = new Evaluation(trainingSet);
                     evaluation.evaluateModelOnce(classifier, instance);
 
-                    if(evaluation.correct() == 1) break;
+                    if(evaluation.correct() == 1){
+                        elist.add(activity.toString());
+                        eListRate.add(evaluation.pctCorrect());
+                    }
                 }
+
+                double max = Double.MIN_VALUE;
+                int pos = 0;
+                for (int j = 0; j < eListRate.size(); ++j){
+                    if(eListRate.get(j) > max){
+                        max = eListRate.get(j);
+                        pos = j;
+                    }
+                }
+
+                instance.setValue(classAttribute, elist.get(pos));
             }
         }
         catch(Exception ex){
@@ -131,13 +176,52 @@ public class WekaModel {
         }
 
         setTestSet(testDataSet);
-        //saveTestInstances(testDataSet);
+    }
+
+    /***
+     * Permite agregar los datos al trainingSet, añadiendo la clase
+     * @param outPut lista de Datos Preparados
+     */
+    public void populatedTestSet(List<Data> outPut, int type){
+        loadTest();
+        Instances testDataSet = convertDataToWekaInstances(outPut);
+        final Attribute classAttribute = testDataSet.attribute(testDataSet.numAttributes()-1);
+        testDataSet.setClass(classAttribute);
+
+        try {
+            for (int i=0; i < testDataSet.numInstances(); i++){
+                Instance instance = testDataSet.get(i);
+
+                if(type == 1)
+                    instance.setValue(classAttribute, Activity.eActivity.Upstairs.toString());
+                else
+                    instance.setValue(classAttribute, Activity.eActivity.Sitting.toString());
+            }
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+
+        addInstancesToTestSet(testDataSet);
+        saveTestInstances();
     }
 
     public void setTestSet(Instances testSet) {
         this.testingSet = testSet;
     }
 
+    public void addInstancesToTestSet(Instances testingSet){
+        for (Instance instance:testingSet){
+            this.testingSet.add(instance);
+        }
+    }
+
+    /***
+     * Obtiene las lista de Actividades
+     * @param user el usuario actual
+     * @param activityList lista general de actividades
+     * @return la lista de actividades del usuario actual con sus calorias quemadas
+     */
     public List<UserActivities> getUserActivities(User user,List<Activity> activityList){
         List<UserActivities> userActivitiesList = new ArrayList<>();
         final Attribute classAttribute = testingSet.attribute(testingSet.numAttributes()-1);
@@ -154,10 +238,18 @@ public class WekaModel {
     }
 
     public static void main (String[] arg){
+
         Accelerometer output = new Accelerometer(5555);
-        output.setTotalSecondsTime(31);
+        output.setTotalSecondsTime(121);
         output.Start();
         WekaModel model = new WekaModel();
-        model.startTestingSet(output.getData());
+        //model.startTestingSet(output.getData());
+
+        model.populatedTestSet(output.getData(),0);
+        /*
+        model = new WekaModel();
+        output.Start();
+        model.populatedTestSet(output.getData(),2);*/
+
     }
 }

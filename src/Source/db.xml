@@ -28,56 +28,19 @@
     </ActivityList>
     <UserList>
         <User>
-            <name>Freddy Mesa</name>
+            <name>Yandri Puello</name>
             <genre>Man</genre>
-            <birthday>1992-11-17</birthday>
-            <height>5.11</height>
-            <weight>180.0</weight>
+            <birthday>1992-10-31</birthday>
+            <height>5.9</height>
+            <weight>173.0</weight>
             <UserActivitiesList>
                 <UserActivities>
                     <activityName>Sitting</activityName>
-                    <calorieBurn>0.7922934895833332</calorieBurn>
+                    <calorieBurn>0.8255998133680555</calorieBurn>
                 </UserActivities>
                 <UserActivities>
                     <activityName>Sitting</activityName>
-                    <calorieBurn>0.7922934895833332</calorieBurn>
-                </UserActivities>
-                <UserActivities>
-                    <activityName>Sitting</activityName>
-                    <calorieBurn>0.7922934895833332</calorieBurn>
-                </UserActivities>
-                <UserActivities>
-                    <activityName>Upstairs</activityName>
-                    <calorieBurn>4.753760937499999</calorieBurn>
-                </UserActivities>
-                <UserActivities>
-                    <activityName>Standing</activityName>
-                    <calorieBurn>0.6338347916666667</calorieBurn>
-                </UserActivities>
-            </UserActivitiesList>
-        </User>
-        <User>
-            <name>Maria Candelario</name>
-            <genre>Woman</genre>
-            <birthday>1990-05-23</birthday>
-            <height>5.5</height>
-            <weight>140.0</weight>
-            <UserActivitiesList>
-                <UserActivities>
-                    <activityName>Sitting</activityName>
-                    <calorieBurn>0.6356690680555556</calorieBurn>
-                </UserActivities>
-                <UserActivities>
-                    <activityName>Sitting</activityName>
-                    <calorieBurn>0.6356690680555556</calorieBurn>
-                </UserActivities>
-                <UserActivities>
-                    <activityName>Sitting</activityName>
-                    <calorieBurn>0.6356690680555556</calorieBurn>
-                </UserActivities>
-                <UserActivities>
-                    <activityName>Sitting</activityName>
-                    <calorieBurn>0.6356690680555556</calorieBurn>
+                    <calorieBurn>0.8255998133680555</calorieBurn>
                 </UserActivities>
             </UserActivitiesList>
         </User>

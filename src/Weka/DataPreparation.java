@@ -3,27 +3,34 @@ package Weka;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- * Created by Freddy Mesa on 26-Apr-14.
- */
 public class DataPreparation implements Runnable{
 
     private ArrayList<ArrayList<Double>> allAxes;
     private ArrayList<ArrayList<Double>> allAxesTime;
     private Data data;
 
-    public DataPreparation(int Position,
-                           ArrayList<ArrayList<Double>> allAxes,
+    /**
+     * Constructor de la Data Preparation
+     * @param allAxes lista de (x,y,z) del Acelerometro
+     * @param allAxesTime lista de los tiempos de cada (x,y,z) del Acelerometro
+     */
+    public DataPreparation(ArrayList<ArrayList<Double>> allAxes,
                            ArrayList<ArrayList<Double>> allAxesTime){
         this.allAxes = allAxes;
         this.allAxesTime = allAxesTime;
 
     }
 
+    /**
+     * Se la preparacion de datos mediante un thread
+     */
     @Override public void run() {
         this.Preparation();
     }
 
+    /**
+     * Se realiza la preparacion de los datos
+     */
     public synchronized void Preparation() {
         data = new Data();
 

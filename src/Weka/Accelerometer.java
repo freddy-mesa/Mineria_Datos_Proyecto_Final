@@ -17,9 +17,12 @@ public class Accelerometer{
     private List<ArrayList<ArrayList<Double>>> allAxes;
     private List<ArrayList<ArrayList<Double>>> allAxesTime;
     private int totalSecondsTime;
-
     private List<Data> dataETL;
 
+    /**
+     * Constructor del Acelerometro
+     * @param Port numero de puerto
+     */
     public Accelerometer(int Port){
         try{
             serverSocket = new DatagramSocket(Port);
@@ -49,17 +52,24 @@ public class Accelerometer{
         DatagramPacket packet;
         int Position = 0;
 
+
         try{
             while(true) {
                 if(startTime){
+                    //Se reciben los datos
                     packet = new DatagramPacket(receiveData, receiveData.length);
                     serverSocket.receive(packet);
                     currentTimeMills = System.currentTimeMillis();
+
+                    //Se calcula el tiempo actual en segundos
                     currentTime = Math.floor((currentTimeMills - time) / 1000);
                     startTime = false;
+                    System.out.println("Starting");
                 }
                 else{
                     currentTimeMills = System.currentTimeMillis();
+
+                    //Se determina si ha pasado la cantidad de segundos que se determino para obtener los datos
                     if((currentTime = Math.floor((currentTimeMills - time) / 1000)) >= this.totalSecondsTime)
                         break;
 
@@ -69,6 +79,7 @@ public class Accelerometer{
 
                 currentTimeMills = currentTimeMills - time;
 
+                //Se determina si ha pasado cada 10 segundos
                 if (currentTime - tenSeconds >= 10) isTenSeconds = true;
 
                 if (isTenSeconds) {
@@ -76,8 +87,8 @@ public class Accelerometer{
                     tenSeconds = currentTime;
                     isTenSeconds = false;
 
-                    //Thread for Data Preparation
-                    DataPreparation ETL = new DataPreparation(Position, allAxes.get(Position), allAxesTime.get(Position));
+                    //Data Preparation mediante threads
+                    DataPreparation ETL = new DataPreparation(allAxes.get(Position), allAxesTime.get(Position));
                     Thread threadETL = new Thread(ETL);
                     threadETL.start();
                     threadETL.join();
@@ -91,11 +102,14 @@ public class Accelerometer{
                 String[] allData = new String(packet.getData()).split(",");
 
                 String x = allData[2].trim(), y = allData[3].trim(), z = allData[4].trim();
+                //System.out.println(x + " " + y + " " + z);
 
+                //Se añaden los axes (x,y,z)
                 allAxes.get(Position).get(0).add(Double.parseDouble(x));
                 allAxes.get(Position).get(1).add(Double.parseDouble(y));
                 allAxes.get(Position).get(2).add(Double.parseDouble(z));
 
+                //Se añaden el tiempo de los axes
                 allAxesTime.get(Position).get(0).add(currentTimeMills);
                 allAxesTime.get(Position).get(1).add(currentTimeMills);
                 allAxesTime.get(Position).get(2).add(currentTimeMills);
